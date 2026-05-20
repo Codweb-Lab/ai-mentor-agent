@@ -1,0 +1,56 @@
+# ==========================================
+# 1. Python & Virtual Environment
+# ==========================================
+__pycache__/
+*.py[cod]
+*.class
+*-scripts/
+venv/
+env/
+.venv/
+
+# ==========================================
+# 2. Environment Variables & Secrets
+# ==========================================
+.env
+.env.*
+secrets.json
+*.pem
+credentials.json
+
+# ==========================================
+# 3. Logs, Uploads & Databases
+# ==========================================
+logs/
+*.log
+backend/uploads/
+*.sqlite3
+db.sqlite3
+
+# ==========================================
+# 4. Machine Learning & Data Analytics 
+# ==========================================
+.ipynb_checkpoints/
+chromadb/                 # (Local vector DB storage ko ignore karna zaroori hai)
+vector_store/
+data/
+*.csv
+*.parquet
+*.pdf
+
+# ==========================================
+# 5. Testing & Background Jobs (Celery)
+# ==========================================
+.pytest_cache/
+.coverage
+htmlcov/
+celerybeat-schedule
+celerybeat.pid
+
+# ==========================================
+# 6. OS & IDE Specific Files
+# ==========================================
+.DS_Store                 # (macOS junk files)
+Thumbs.db                 # (Windows junk files)
+.vscode/                  # (VS Code workspace settings)
+.idea/                    # (PyCharm settings)
