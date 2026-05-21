@@ -2,11 +2,14 @@ fastapi
 uvicorn
 sqlalchemy
 asyncpg
+bcrypt
 alembic
 pydantic[email]
 passlib[bcrypt]
 pyjwt
 python-dotenv
+python-jose[cryptography]
+python-multipart
 pytest
 pytest-asyncio
 openai

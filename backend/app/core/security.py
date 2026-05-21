@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Union
 from jose import jwt
 from passlib.context import CryptContext
-import os
+import os, sys, bcrypt
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,18 +12,27 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
 
-# initializing CryptContext for password hashing
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 
 # 1. hashing the password
 def get_password_hash(password: str) -> str:
-    return pwd_context.hash(password)
+    print("\n" + "!"*40)
+    print(f"SECURITY.PY ME PAUNCHA PASSWORD: {password}")
+    print(f"PASSWORD LENGTH: {len(password)}")
+    print("!"*40 + "\n", file=sys.stderr)
+
+    # 1. Change string password to bytes
+    password_bytes = password.encode('utf-8')
+    # 2. Generate salt
+    salt = bcrypt.gensalt()
+    # 3. Hash using bcrypt
+    hashed_password = bcrypt.hashpw(password_bytes, salt)
+    # 4. Convert back to string and return
+    return hashed_password.decode('utf-8')
 
 
 # 2. matching the hashed password with the plain password
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 
 # 3. creating JWT Access Token for user

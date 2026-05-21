@@ -13,7 +13,6 @@ class UserCreate(UserBase):
 # Response Schema
 class UserResponse(UserBase):
     id: int
-    is_active: bool
     created_at: datetime
     updated_at: Optional[datetime] = None
 
